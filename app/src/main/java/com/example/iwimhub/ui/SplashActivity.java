@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.iwimhub.R;
-import com.example.iwimhub.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity{
     @Override

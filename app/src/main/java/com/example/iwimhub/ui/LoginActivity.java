@@ -1,4 +1,4 @@
-package com.example.iwimhub.ui.login;
+package com.example.iwimhub.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
