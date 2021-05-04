@@ -30,12 +30,23 @@
         android:layout_marginTop="100dp">
 
         <Button
+            android:id="@+id/defaultfun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/my_blue_1"
+            android:textColor="@color/white"
+            android:textSize="10pt"
+            android:onClick="defaultfun"
+            android:text="fragment" />
+
+        <Button
             android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/my_blue_1"
             android:textColor="@color/white"
             android:textSize="10pt"
+            android:layout_marginTop="20dp"
             android:onClick="profile"
             android:text="profile" />
 

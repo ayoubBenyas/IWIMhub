@@ -1,21 +1,27 @@
 package com.example.iwimhub.data.model;
 
 public class StudentModel extends UserModel{
+    //email:id
+    private String cne, apogee;
 
-    private String cne;
-    private String apogee;
-
-    public StudentModel(String uid, String firstName,String lastName, String cne, String apogee, String email){
-        super( uid, firstName, lastName, email);
-        this.cne = cne;
-        this.apogee = apogee;
+    public StudentModel(){
+        super();
     }
 
     public String getCne() {
         return cne;
     }
 
+    public void setCne(String cne) {
+        this.cne = cne;
+    }
+
     public String getApogee() {
         return apogee;
     }
+
+    public void setApogee(String apogee) {
+        this.apogee = apogee;
+    }
+
 }

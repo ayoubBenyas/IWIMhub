@@ -5,11 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".ui.LoginActivity">
 
     <ImageView
@@ -20,87 +16,67 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintBottom_toTopOf="@+id/login_form"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1"
         app:srcCompat="@drawable/ic_logo_blue" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_button_light_blue"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
-        android:maxLength="30"
-        android:paddingStart="20dp"
-        android:selectAllOnFocus="true"
-        android:textColor="@color/my_blue_1"
-        android:textColorHint="@color/gray"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_button_light_blue"
-        android:hint="@string/prompt_password"
-        android:imeActionLabel="@string/action_sign_in_short"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:maxLength="30"
-        android:paddingStart="20dp"
-        android:selectAllOnFocus="true"
-        android:textColor="@color/my_blue_1"
-        android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/bg_button_blue"
-        android:enabled="true"
-        android:text="@string/action_login"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.2" />
+        <EditText
+            android:id="@+id/username"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:maxLength="30"
+            android:selectAllOnFocus="true"
+            style="@style/input_light_blue"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:hint="@string/prompt_password"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLength="30"
+            style="@style/input_light_blue"/>
+
+        <Button
+            android:id="@+id/login"
+            android:text="@string/action_login"
+            style="@style/button_blue"/>
+
+        <TextView
+            android:id="@+id/register_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textColor="@color/my_blue_1"
+            android:text="Don't have an account? register now"/>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageView
         android:id="@+id/organization"

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.iwimhub.ui.DefaultActivity;
 import com.example.iwimhub.ui.ProfileActivity;
 import com.example.iwimhub.ui.LoginActivity;
 import com.example.iwimhub.ui.RegisterActivity;
@@ -20,6 +21,11 @@ public class TotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toto);
 
+    }
+
+    public void defaultfun(View view){
+        Intent i = new Intent( TotoActivity.this, DefaultActivity.class);
+        startActivity(i);
     }
 
     public void profile(View view) {

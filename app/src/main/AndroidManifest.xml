@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.RegisterActivity"></activity>
+        <activity android:name=".ui.DefaultActivity"></activity>
+        <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.ProfileActivity" />
         <activity android:name=".TotoActivity" />
-        <activity android:name=".DeafualtActivity" />
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login" />
