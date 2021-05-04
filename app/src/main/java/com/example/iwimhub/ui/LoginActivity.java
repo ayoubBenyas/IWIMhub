@@ -48,12 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         mAuthStateListener = firebaseAuth -> {
             FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
             if(mFirebaseUser != null){
-                Toast.makeText(LoginActivity.this, "You are logged in", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(LoginActivity.this, TotoActivity.class);
+                Intent i = new Intent(LoginActivity.this, DefaultActivity.class);
                 startActivity(i);
-            } /*else{
-                Toast.makeText(LoginActivity.this, "Please you have to login in !", Toast.LENGTH_SHORT).show();
-            }*/
+            }
         };
 
         loginButton.setOnClickListener(v -> {

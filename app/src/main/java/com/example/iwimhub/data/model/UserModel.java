@@ -30,4 +30,8 @@ public class UserModel {
         this.photoUl = photoUl;
     }
 
+    @Override
+    public String toString() {
+        return firstName+" "+lastName;
+    }
 }

@@ -77,7 +77,7 @@ import com.google.firebase.auth.FirebaseUser;
              }
 
              newPassword = newPasswordEditText.getText().toString();
-             if(email.isEmpty()){
+             if(newPassword.isEmpty()){
                  newPasswordEditText.setError("New password cannot be empty!");
                  newPasswordEditText.requestFocus();
                  return;
