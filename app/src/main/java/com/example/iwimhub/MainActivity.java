@@ -15,8 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         new Handler().postDelayed(() -> {
             Intent i = new Intent(MainActivity.this , LoginActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
-        }, 1000);
+        }, 500);
     }
 }

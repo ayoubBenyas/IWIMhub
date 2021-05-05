@@ -28,7 +28,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textAllCaps="true"
-            android:text="displayName" />
+            android:text=".." />
 
         <TextView
             android:id="@+id/diploma"
@@ -75,7 +75,7 @@
             android:layout_marginEnd="30dp"
             android:textSize="8pt"
             android:textColor="@color/design_default_color_primary_variant"
-            android:text="email" />
+            android:text=".." />
 
         <View
             android:layout_width="match_parent"

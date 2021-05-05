@@ -39,6 +39,8 @@ public class ModuleModel {
         public void setEndAt(String endAt) {
             this.endAt = endAt;
         }
+
+        public String toTime(){ return startAt+" - "+endAt; }
     }
 
     public String getCode() {

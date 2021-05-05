@@ -16,15 +16,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.iwimhub.R;
+import com.example.iwimhub.data.model.StudentModel;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class ProfileFragment extends Fragment {
     private static final String ARG_CURRENT_USER = "current-user";
 
     private FirebaseUser user;
-    private TextView displayNameView, emailView;
+    private static FirebaseFirestore db;
+    private TextView displayNameView, emailView, cneTextView, apogeeTextView;
     private ImageView photoView;
+
+    static{
+        db =  FirebaseFirestore.getInstance();
+    }
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -59,23 +68,28 @@ public class ProfileFragment extends Fragment {
         displayNameView = view.findViewById(R.id.displayName);
         emailView = view.findViewById(R.id.email);
         photoView = view.findViewById(R.id.photo);
+        cneTextView = view.findViewById(R.id.cne);
+        apogeeTextView = view.findViewById(R.id.apogee);
 
         if( user != null) {
-            updateUI(user);
+            db.collection("students")
+                    .document(user.getEmail()).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    StudentModel me = documentSnapshot.toObject(StudentModel.class);
+                    updateUI(me);
+                }
+            });
         }else{
             Toast.makeText( getActivity(), "non-logged!!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void updateUI(FirebaseUser u){
-        // UID specific to the provider
-        String uid = u.getUid();
-        // Name, email address, and profile photo Url
-        String fullName = u.getDisplayName();
-        String email = u.getEmail();
-        Uri photoUrl = u.getPhotoUrl();
-
-        displayNameView.setText(fullName);
-        emailView.setText(email);
+    private void updateUI(StudentModel u){
+        displayNameView.setText(u.toString());
+        emailView.setText(user.getEmail());
+        apogeeTextView.setText(u.getApogee());
+        cneTextView.setText(u.getCne());
     }
 }

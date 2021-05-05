@@ -24,6 +24,9 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="Profile"
+                android:textSize="9pt"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:paddingRight="30dp"
                 style="@style/account_elements"/>
 
             <View
@@ -36,6 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Update profile"
+                android:textSize="9pt"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:paddingEnd="30dp"
                 style="@style/account_elements"/>
 
             <View
@@ -49,6 +55,9 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="Change password"
+                android:textSize="9pt"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                android:paddingEnd="30dp"
                 style="@style/account_elements"/>
 
             <View
@@ -62,6 +71,9 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="Logout"
+                android:textSize="9pt"
+                android:drawableRight="@drawable/ic_disconnect"
+                android:paddingEnd="30dp"
                 style="@style/account_elements"/>
 
             <View

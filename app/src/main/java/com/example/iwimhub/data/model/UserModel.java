@@ -2,7 +2,7 @@ package com.example.iwimhub.data.model;
 
 public class UserModel {
     protected String firstName, lastName;
-    protected String photoUl;
+    protected String photoUrl;
 
     public UserModel(){}
 
@@ -22,12 +22,12 @@ public class UserModel {
         this.lastName = lastName;
     }
 
-    public String getPhotoUl() {
-        return photoUl;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setPhotoUl(String photoUl) {
-        this.photoUl = photoUl;
+    public void setPhotoUrl(String photoUl) {
+        this.photoUrl = photoUrl;
     }
 
     @Override

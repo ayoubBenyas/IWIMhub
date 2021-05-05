@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
             if(mFirebaseUser != null){
                 Intent i = new Intent(LoginActivity.this, DefaultActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         };
@@ -76,7 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                     if(!task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "Incorrect email or password !", Toast.LENGTH_SHORT).show();
                     }else{
-                        startActivity(new Intent(LoginActivity.this, TotoActivity.class));
+                        Intent i = new Intent(LoginActivity.this, DefaultActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
                     }
                 }
             });

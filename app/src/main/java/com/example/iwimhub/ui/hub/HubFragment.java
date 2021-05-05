@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -52,8 +53,8 @@ public class HubFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         db.collection("modules").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                QuerySnapshot t  = task.getResult();
-                List<ModuleModel> listModules = t.toObjects(ModuleModel.class);
+                QuerySnapshot result  = task.getResult();
+                List<ModuleModel> listModules = result.toObjects(ModuleModel.class);
 
                 ModuleModel[] arrayModules = new ModuleModel[listModules.size()];
                 listModules.toArray(arrayModules);
@@ -61,7 +62,11 @@ public class HubFragment extends Fragment {
                 HubListAdapter adapter = new HubListAdapter( getActivity(), arrayModules);
                 hubListView = (ListView) view.findViewById(R.id.container_list_hub);
                 hubListView.setAdapter(adapter);
-            }else{
+
+                hubListView.setOnItemClickListener((AdapterView.OnItemClickListener) (parent, v, position, id) -> {
+                    Toast.makeText(getActivity(),"Position["+position+"] : "+arrayModules[position].getTitle(),Toast.LENGTH_SHORT).show();
+                });
+                    }else{
                 Toast.makeText(getActivity(), "Something went wrong!"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
