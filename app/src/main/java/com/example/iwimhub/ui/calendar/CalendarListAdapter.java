@@ -31,10 +31,10 @@ public class CalendarListAdapter extends ArrayAdapter<ModuleModel> {
 
         Log.d("Calendar index ", modules[position].getTitle()+": [" +position+"]" );
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
-        TextView timeText = (TextView) rowView.findViewById(R.id.time);
+        TextView dateTimeText = (TextView) rowView.findViewById(R.id.dateTime);
 
         titleText.setText(modules[position].getTitle());
-        timeText.setText(modules[position].getSchedule().toTime());
+        dateTimeText.setText(modules[position].getSchedule().toString());
 
         return rowView;
     }

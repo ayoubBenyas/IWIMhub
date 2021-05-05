@@ -40,6 +40,8 @@ public class ModuleModel {
             this.endAt = endAt;
         }
 
+        public String toString(){ return day+", "+toTime(); }
+
         public String toTime(){ return startAt+" - "+endAt; }
     }
 

@@ -9,15 +9,15 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
         android:layout_gravity="center"
         app:srcCompat="@drawable/avatar_element" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:layout_weight="1"
+        android:paddingLeft="20dp"
+        android:layout_weight="2"
         android:orientation="vertical">
         <TextView
             android:id="@+id/title"
@@ -34,6 +34,20 @@
             android:layout_height="wrap_content"
             android:textSize="7pt"
             android:text=".."/>
+        <TextView
+            android:id="@+id/timing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="5pt"
+            android:gravity="right"
+            android:text=".."/>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/icon_hub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/ic_hub_blue"
+        android:visibility="invisible"
+        android:layout_weight="6.5"/>
 </LinearLayout>

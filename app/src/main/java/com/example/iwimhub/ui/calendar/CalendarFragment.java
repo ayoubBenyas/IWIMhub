@@ -47,47 +47,31 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
                 new ViewModelProvider(this).get(CalendarViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_calendar, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_calendar);
-        calendarViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));*/
-        return root;
+        return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        hashCalendar = new HashMap<String , List<ModuleModel>>();
-        hashCalendar.put("Monday", new ArrayList<ModuleModel>());
-        hashCalendar.put("Tuesday", new ArrayList<ModuleModel>());
-        hashCalendar.put("Wednesday", new ArrayList<ModuleModel>());
-        hashCalendar.put("Thursday", new ArrayList<ModuleModel>());
-        hashCalendar.put("Friday", new ArrayList<ModuleModel>());
-        hashCalendar.put("Saturday", new ArrayList<ModuleModel>());
 
-        //.orderBy("schedule.day")
-        //.orderBy("schedule.startAt")
-
-        db.collection("modules").get().addOnCompleteListener(task -> {
+        db.collection("modules")
+                .orderBy("schedule.day")
+                .orderBy("schedule.startAt")
+                .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot result  = task.getResult();
                 List<ModuleModel> listModules = result.toObjects(ModuleModel.class);
 
-                for (ModuleModel module: listModules ) {
-                    hashCalendar.get(module.getSchedule().getDay()).add(module);
-                }
+                ModuleModel[] arrayModules = new ModuleModel[listModules.size()];
+                listModules.toArray(arrayModules);
 
-                fillListView( view, R.id.container_list_calendar_monday,    getModulesOfDay(hashCalendar, "Monday"));
-                fillListView( view, R.id.container_list_calendar_tuesday,   getModulesOfDay(hashCalendar, "Tuesday"));
-                fillListView( view, R.id.container_list_calendar_wednesday, getModulesOfDay(hashCalendar, "Wednesday"));
-                fillListView( view, R.id.container_list_calendar_thursday,  getModulesOfDay(hashCalendar, "Thursday"));
-                fillListView( view, R.id.container_list_calendar_friday,    getModulesOfDay(hashCalendar, "Friday"));
-                fillListView( view, R.id.container_list_calendar_saturday,  getModulesOfDay(hashCalendar, "Saturday"));
+                fillListView( view, R.id.container_list_calendar, arrayModules);
 
             }else{
                 Toast.makeText(getActivity(), "Something went wrong!"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                /*ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("firror : ",task.getException().getMessage() );
-                clipboardManager.setPrimaryClip(clip);*/
+                clipboardManager.setPrimaryClip(clip);
             }
         });
 

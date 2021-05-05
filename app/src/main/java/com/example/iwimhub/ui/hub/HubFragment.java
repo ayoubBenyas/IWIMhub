@@ -20,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
 import java.util.List;
 
 public class HubFragment extends Fragment {
@@ -51,7 +53,13 @@ public class HubFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        db.collection("modules").get().addOnCompleteListener(task -> {
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        String dayName = (new DateFormatSymbols()).getWeekdays()[dayOfWeek];
+        db.collection("modules")
+                .whereEqualTo("schedule.day", dayName)
+                .orderBy("schedule.startAt")
+                .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot result  = task.getResult();
                 List<ModuleModel> listModules = result.toObjects(ModuleModel.class);
