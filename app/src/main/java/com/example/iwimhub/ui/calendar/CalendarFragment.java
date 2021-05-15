@@ -55,7 +55,7 @@ public class CalendarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         db.collection("modules")
-                .orderBy("schedule.day")
+                //.orderBy("schedule.day")
                 .orderBy("schedule.startAt")
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

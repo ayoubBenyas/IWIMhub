@@ -1,6 +1,6 @@
 package com.example.iwimhub.data.model;
 
-public class UserModel {
+public class UserModel extends Model{
     protected String firstName, lastName;
     protected String photoUrl;
 

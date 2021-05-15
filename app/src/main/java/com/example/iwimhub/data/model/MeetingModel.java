@@ -1,7 +1,7 @@
 package com.example.iwimhub.data.model;
 
-public class MeetingModel {
-    String link, date;
+public class MeetingModel extends Model{
+    private String link, date, subject;
 
     public MeetingModel(){}
 
@@ -21,4 +21,11 @@ public class MeetingModel {
         this.date = date;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 }

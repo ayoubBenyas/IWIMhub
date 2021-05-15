@@ -20,7 +20,6 @@ public class CalendarListAdapter extends ArrayAdapter<ModuleModel> {
 
     CalendarListAdapter(Activity context, ModuleModel[] modules){
         super(context, R.layout.list_calendar, modules);
-        Log.d("Calendar len ", " [" + modules.length );
         this.context = context;
         this.modules = modules;
     }
@@ -29,7 +28,6 @@ public class CalendarListAdapter extends ArrayAdapter<ModuleModel> {
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.list_calendar, null,true);
 
-        Log.d("Calendar index ", modules[position].getTitle()+": [" +position+"]" );
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
         TextView dateTimeText = (TextView) rowView.findViewById(R.id.dateTime);
 

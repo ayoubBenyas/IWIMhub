@@ -53,6 +53,17 @@
             android:maxLength="30"
             style="@style/input_light_blue"/>
 
+        <TextView
+            android:id="@+id/forgot_password_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:clickable="true"
+            android:paddingRight="20dp"
+            android:visibility="gone"
+            android:textColor="@color/my_blue_1"
+            android:text="Forgot password"/>
+
         <Button
             android:id="@+id/login"
             android:text="@string/action_login"

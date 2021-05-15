@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText;
     private Button loginButton;
-    private TextView registerTextview;
+    private TextView registerTextView, forgotPasswordTextView;
     private ProgressBar progressbar;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -43,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         progressbar = findViewById(R.id.loading);
         loginButton = findViewById(R.id.login);
-        registerTextview = findViewById(R.id.register_message);
+        registerTextView  = findViewById(R.id.register_message);
+        forgotPasswordTextView = findViewById(R.id.forgot_password_message);
 
         mAuthStateListener = firebaseAuth -> {
             FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     progressbar.setVisibility(View.GONE);
                     if(!task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "Incorrect email or password !", Toast.LENGTH_SHORT).show();
+                        forgotPasswordTextView.setVisibility(View.VISIBLE);
                     }else{
                         Intent i = new Intent(LoginActivity.this, DefaultActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -85,8 +87,13 @@ public class LoginActivity extends AppCompatActivity {
             });
         });
 
-        registerTextview.setOnClickListener(v -> {
+        registerTextView.setOnClickListener(v -> {
             Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(i);
+        });
+
+        forgotPasswordTextView.setOnClickListener(v -> {
+            Intent i = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             startActivity(i);
         });
 

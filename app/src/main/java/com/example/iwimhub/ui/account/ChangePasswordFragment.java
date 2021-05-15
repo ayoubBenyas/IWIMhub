@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.iwimhub.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
  public class ChangePasswordFragment extends Fragment {
@@ -21,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
     private static final String ARG_CURRENT_USER = "current-user";
 
     private FirebaseUser user;
-    private EditText emailEditText, currentPasswordEditText, newPasswordEditText;
+    private EditText newPasswordEditText, confirmPasswordEditText;
     private Button submitChangeButton;
 
     public ChangePasswordFragment() {
@@ -55,26 +56,12 @@ import com.google.firebase.auth.FirebaseUser;
      @Override
      public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
          super.onViewCreated(view, savedInstanceState);
-         emailEditText = view.findViewById(R.id.email);
-         currentPasswordEditText = view.findViewById(R.id.current_password);
          newPasswordEditText = view.findViewById(R.id.new_password);
+         confirmPasswordEditText = view.findViewById(R.id.confirm_password);
          submitChangeButton = view.findViewById(R.id.submit_change);
 
          submitChangeButton.setOnClickListener(v->{
-             String email, currentPassword, newPassword;
-             email = emailEditText.getText().toString();
-             /*if(email.isEmpty()){
-                 emailEditText.setError("Please enter your email !");
-                 emailEditText.requestFocus();
-                 return;
-             }*/
-
-             currentPassword = currentPasswordEditText.getText().toString();
-             if(currentPassword.isEmpty()){
-                 currentPasswordEditText.setError("Please enter your current password !");
-                 currentPasswordEditText.requestFocus();
-                 return;
-             }
+             String confirmPassword, newPassword;
 
              newPassword = newPasswordEditText.getText().toString();
              if(newPassword.isEmpty()){
@@ -83,7 +70,20 @@ import com.google.firebase.auth.FirebaseUser;
                  return;
              }
 
-             //user.updatePassword(newPassword);
+             confirmPassword = confirmPasswordEditText.getText().toString();
+             if(confirmPassword.isEmpty()){
+                 confirmPasswordEditText.setError("Confirm password cannot be empty!");
+                 confirmPasswordEditText.requestFocus();
+                 return;
+             }
+
+             if(!confirmPassword.equals(newPassword)){
+                 confirmPasswordEditText.setError("Confirm password don't match!");
+                 confirmPasswordEditText.requestFocus();
+                 return;
+             }
+
+             FirebaseAuth.getInstance().getCurrentUser().updatePassword(newPassword);
 
              Toast.makeText( getActivity(), "password changed()", Toast.LENGTH_SHORT).show();
              getActivity().getFragmentManager().popBackStack();

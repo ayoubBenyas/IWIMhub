@@ -1,6 +1,7 @@
 package com.example.iwimhub.ui.hub;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iwimhub.R;
+import com.example.iwimhub.data.model.MeetingModel;
 import com.example.iwimhub.data.model.ModuleModel;
-import com.example.iwimhub.ui.LoginActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HubFragment extends Fragment {
 
@@ -46,7 +51,6 @@ public class HubFragment extends Fragment {
             ViewGroup container, Bundle savedInstanceState) {
         hubViewModel = new ViewModelProvider(this).get(HubViewModel.class);
         View root = inflater.inflate(R.layout.fragment_hub, container, false);
-
         return root;
     }
 
@@ -62,17 +66,46 @@ public class HubFragment extends Fragment {
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot result  = task.getResult();
-                List<ModuleModel> listModules = result.toObjects(ModuleModel.class);
 
-                ModuleModel[] arrayModules = new ModuleModel[listModules.size()];
-                listModules.toArray(arrayModules);
+                List<ModuleModel> listModules = new ArrayList<ModuleModel>();
+                for (QueryDocumentSnapshot document: task.getResult()) {
+                    ModuleModel module = document.toObject(ModuleModel.class);
+                    module.id(document.getId());
+                    listModules.add((module));
+                }
 
-                HubListAdapter adapter = new HubListAdapter( getActivity(), arrayModules);
+                HubListAdapter adapter = new HubListAdapter( getActivity(), listModules);
                 hubListView = (ListView) view.findViewById(R.id.container_list_hub);
                 hubListView.setAdapter(adapter);
 
                 hubListView.setOnItemClickListener((AdapterView.OnItemClickListener) (parent, v, position, id) -> {
-                    Toast.makeText(getActivity(),"Position["+position+"] : "+arrayModules[position].getTitle(),Toast.LENGTH_SHORT).show();
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                    String  currentDate = sdf.format(new Date());
+                    Log.d("Hub", "Current Date : "+currentDate);
+
+                    db.collection("modules/"+listModules.get(position).id()+"/meetings")
+                        .whereEqualTo("date" , currentDate )
+                        .get().addOnCompleteListener(querySnapshot -> {
+                        if (querySnapshot.isSuccessful()) {
+                            QuerySnapshot res  = task.getResult();
+                            List<MeetingModel> listMeeting = result.toObjects(MeetingModel.class);
+
+                            Log.d("Hub", "listMeeting.size() : "+listMeeting.size());
+                            if( listMeeting.size() > 0 ){
+                                MeetingModel meeting = listMeeting.get(0);
+                                Log.d("Hub", "meeting.getDate() : "+meeting.getDate());
+                                String url = meeting.getLink();
+                                Toast.makeText(getActivity(),"meeting : "+url ,Toast.LENGTH_SHORT).show();
+                                /*if (!url.startsWith("http://") && !url.startsWith("https://"))
+                                    url = "http://" + url;
+                                Toast.makeText(getActivity(),"meeting : "+url,Toast.LENGTH_SHORT).show();
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                startActivity(browserIntent);*/
+                            }
+                        }
+                    });
+
                 });
                     }else{
                 Toast.makeText(getActivity(), "Something went wrong!"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();

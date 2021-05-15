@@ -2,7 +2,7 @@ package com.example.iwimhub.data.model;
 
 import com.google.firebase.firestore.DocumentReference;
 
-public class ModuleModel {
+public class ModuleModel extends  Model{
     private String code, title;
     private DocumentReference chef;
     private Schedule schedule;
