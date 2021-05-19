@@ -22,6 +22,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
+    <string name="title_home">Home</string>
     <string name="title_notification">Notifications</string>
     <string name="title_hub">Hub</string>
     <string name="title_calendar">Calendar</string>

@@ -55,11 +55,12 @@ public class CalendarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         db.collection("modules")
-                //.orderBy("schedule.day")
+                .orderBy("schedule.day")
                 .orderBy("schedule.startAt")
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot result  = task.getResult();
+
                 List<ModuleModel> listModules = result.toObjects(ModuleModel.class);
 
                 ModuleModel[] arrayModules = new ModuleModel[listModules.size()];
