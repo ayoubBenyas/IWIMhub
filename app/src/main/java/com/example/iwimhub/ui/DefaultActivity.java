@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import com.example.iwimhub.R;
 import com.example.iwimhub.ui.calendar.CalendarFragment;
+import com.example.iwimhub.ui.home.HomeFragment;
 import com.example.iwimhub.ui.hub.HubFragment;
 import com.example.iwimhub.ui.notification.NotificationFragment;
 import com.example.iwimhub.ui.account.AccountFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DefaultActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigation;
+    private BottomNavigationView bottomNavigation;
     private TextView titleTextView;
-    private ImageView accountImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,31 +28,56 @@ public class DefaultActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        accountImageView  = findViewById(R.id.navigation_account);
-        accountImageView.setOnClickListener(v->{
-            titleTextView.setText("Account");
-            openFragment(AccountFragment.newInstance());
+        ImageView accountImageView  = findViewById(R.id.navigation_account);
+        ImageView backImageView = findViewById(R.id.back);
+
+        backImageView.setOnClickListener(v->{
+            getSupportFragmentManager().popBackStackImmediate();
+            return ;
         });
 
-        titleTextView.setText(R.string.title_notification);
-        openFragment(NotificationFragment.newInstance());
+        accountImageView.setOnClickListener(v->{
+            openFragment(AccountFragment.newInstance(), "Account");
+        });
+
+        titleTextView.setText(R.string.title_home);
+        openFragment(HomeFragment.newInstance());
 
     }
 
     public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
-        //transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void openFragment(Fragment fragment, String title) {
+        titleTextView.setText(title);
+        openFragment( fragment);
+    }
+
+    public void openFragmentWithBackStack(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void openFragmentWithBackStack(Fragment fragment, String title) {
+        titleTextView.setText(title);
+        openFragmentWithBackStack(fragment);
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
         item -> {
             titleTextView.setText(item.getTitle());
             switch (item.getItemId()) {
-                case R.id.navigation_notification:
-                    openFragment(NotificationFragment.newInstance());
+                case R.id.navigation_home:
+                    openFragment(HomeFragment.newInstance());
                     break;
+                /*case R.id.navigation_notification:
+                    openFragment(NotificationFragment.newInstance());
+                    break;*/
                 case R.id.navigation_hub:
                     openFragment(HubFragment.newInstance());
                     break;

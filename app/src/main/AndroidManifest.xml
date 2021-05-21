@@ -12,8 +12,6 @@
         <activity android:name=".ui.ForgotPasswordActivity"></activity>
         <activity android:name=".ui.DefaultActivity" />
         <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.ProfileActivity" />
-        <activity android:name=".TotoActivity" />
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login" />

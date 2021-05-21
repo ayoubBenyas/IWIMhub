@@ -30,7 +30,7 @@ public class HubListAdapter extends ArrayAdapter<ModuleModel> {
     private List<ModuleModel> modules;
 
     HubListAdapter(Activity context, List<ModuleModel> modules){
-        super(context, R.layout.list_hub, modules);
+        super(context, R.layout.item_hub, modules);
         this.context = context;
         this.modules = modules;
     }
@@ -38,7 +38,7 @@ public class HubListAdapter extends ArrayAdapter<ModuleModel> {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View getView(int position, View view, ViewGroup parent)  {
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.list_hub, null,true);
+        View rowView = inflater.inflate(R.layout.item_hub, null,true);
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
         TextView professorText = (TextView) rowView.findViewById(R.id.professor);
         TextView timingText = (TextView) rowView.findViewById(R.id.timing);

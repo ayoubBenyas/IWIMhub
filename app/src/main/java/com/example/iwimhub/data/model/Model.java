@@ -13,4 +13,8 @@ public class Model {
         return null;
     }
 
+    public String getEmail(){
+        return id();
+    }
+
 }

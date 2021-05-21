@@ -5,12 +5,12 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home"
         android:title="@string/title_home" />
-
+<!--
     <item
         android:id="@+id/navigation_notification"
         android:icon="@drawable/ic_activity"
         android:title="Notif" />
-
+-->
     <item
         android:id="@+id/navigation_hub"
         android:icon="@drawable/ic_hub"

@@ -31,7 +31,6 @@
             android:text=".." />
 
         <TextView
-            android:id="@+id/diploma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -41,7 +40,6 @@
             android:text="Diplome Ingénierie d’Etat " />
 
         <TextView
-            android:id="@+id/field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

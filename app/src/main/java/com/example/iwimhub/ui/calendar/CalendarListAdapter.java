@@ -1,7 +1,6 @@
 package com.example.iwimhub.ui.calendar;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,6 @@ import android.widget.TextView;
 
 import com.example.iwimhub.R;
 import com.example.iwimhub.data.model.ModuleModel;
-import com.example.iwimhub.data.model.ProfessorModel;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class CalendarListAdapter extends ArrayAdapter<ModuleModel> {
 
@@ -19,14 +16,14 @@ public class CalendarListAdapter extends ArrayAdapter<ModuleModel> {
     private ModuleModel[] modules;
 
     CalendarListAdapter(Activity context, ModuleModel[] modules){
-        super(context, R.layout.list_calendar, modules);
+        super(context, R.layout.item_calendar, modules);
         this.context = context;
         this.modules = modules;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.list_calendar, null,true);
+        View rowView = inflater.inflate(R.layout.item_calendar, null,true);
 
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
         TextView dateTimeText = (TextView) rowView.findViewById(R.id.dateTime);
