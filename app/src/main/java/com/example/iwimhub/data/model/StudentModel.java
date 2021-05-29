@@ -6,6 +6,7 @@ public class StudentModel extends UserModel{
 
     public StudentModel(){
         super();
+        role("STUDENT");
     }
 
     public String getCne() {

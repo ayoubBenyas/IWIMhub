@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
         });
 
         studentButton.setOnClickListener(v -> {
-            Toast.makeText( getActivity(), "Studentssss", Toast.LENGTH_SHORT).show();
+            //Toast.makeText( getActivity(), "Studentssss", Toast.LENGTH_SHORT).show();
         });
     }
 }

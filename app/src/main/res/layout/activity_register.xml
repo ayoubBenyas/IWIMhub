@@ -69,12 +69,12 @@
             android:inputType="textPassword"
             android:maxLength="30"/>
         <Button
-            android:id="@+id/login"
+            android:id="@+id/register"
             style="@style/button_blue"
 
             android:text="@string/action_register"/>
         <TextView
-            android:id="@+id/register_message"
+            android:id="@+id/signin_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"

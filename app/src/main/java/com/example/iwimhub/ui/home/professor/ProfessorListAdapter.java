@@ -40,7 +40,6 @@ public class ProfessorListAdapter extends RecyclerView.Adapter<ProfessorListAdap
         public void onClick(View view)
         {
             int pos = getLayoutPosition();
-            Toast.makeText( context, "Students()", Toast.LENGTH_SHORT).show();
             ((DefaultActivity)context).openFragmentWithBackStack(new ProfessorProfileFragment(professors.get(pos)));
         }
 

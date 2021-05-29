@@ -1,8 +1,5 @@
 package com.example.iwimhub.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,17 +9,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.iwimhub.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText, passwordEditText;
-    private Button loginButton;
-    private TextView registerTextView, forgotPasswordTextView;
     private ProgressBar progressbar;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -41,9 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         progressbar = findViewById(R.id.loading);
-        loginButton = findViewById(R.id.login);
-        registerTextView  = findViewById(R.id.register_message);
-        forgotPasswordTextView = findViewById(R.id.forgot_password_message);
+        Button loginButton = findViewById(R.id.login);
+        TextView signUpTextView = findViewById(R.id.register_message);
+        TextView forgotPasswordTextView = findViewById(R.id.forgot_password_message);
 
         mAuthStateListener = firebaseAuth -> {
             FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
@@ -70,24 +64,25 @@ public class LoginActivity extends AppCompatActivity {
 
             progressbar.setVisibility(View.VISIBLE);
 
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressbar.setVisibility(View.GONE);
-                    if(!task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "Incorrect email or password !", Toast.LENGTH_SHORT).show();
-                        forgotPasswordTextView.setVisibility(View.VISIBLE);
-                    }else{
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, task -> {
+                progressbar.setVisibility(View.GONE);
+                if(!task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "Incorrect email or password !", Toast.LENGTH_SHORT).show();
+                    forgotPasswordTextView.setVisibility(View.VISIBLE);
+                }else{
+                    if(true || mAuth.getCurrentUser().isEmailVerified()){
                         Intent i = new Intent(LoginActivity.this, DefaultActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Please verify your email address.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         });
 
-        registerTextView.setOnClickListener(v -> {
+        signUpTextView.setOnClickListener(v -> {
             Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(i);
         });

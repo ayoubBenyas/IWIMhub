@@ -3,6 +3,7 @@ package com.example.iwimhub.data.model;
 public class UserModel extends Model{
     protected String firstName, lastName;
     protected String photoUrl;
+    protected String ROLE;
 
     public UserModel(){}
 
@@ -28,6 +29,15 @@ public class UserModel extends Model{
 
     public void setPhotoUrl(String photoUl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String role() {
+        return ROLE;
+    }
+
+    public String role(String role) {
+        this.ROLE = role;
+        return null;
     }
 
     @Override
